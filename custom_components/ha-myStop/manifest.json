@@ -1,0 +1,11 @@
+{
+  "domain": "ha-myStop",
+  "name": "myStop",
+  "codeowners": ["@MapGuy11"],
+  "config_flow": true,
+  "documentation": "https://github.com/MapGuy11/ha-myStop",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "",
+  "requirements": ["aiohttp>=3.9.0","yarl>=1.9.2"],
+  "version": "1.0.0"
+}

@@ -1,0 +1,47 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add myStop",
+        "description": "Select your Transit Agency.",
+        "data": {
+          "agency_name": "Transit Agency",
+          "stop_id": "Stop ID"
+        }
+      },
+      "route": {
+        "title": "Select Route",
+        "description": "Choose a route from {agency}.",
+        "data": {
+          "route": "Routes Available to Choose"
+        }
+      },
+      "stop": {
+        "title": "Select Stop",
+        "description": "Choose a stop for route {route_id}.",
+        "data": {
+          "stop": "Stops Available to Choose"
+        }
+      },
+      "manual": {
+        "title": "Manual Configuration",
+        "description": "Could not fetch routes automatically. Please enter details manually.",
+        "data": {
+          "agency_name": "Agency Name",
+          "base_url": "InfoPoint URL",
+          "stop_id": "Stop ID"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect. Check the URL and Stop ID.",
+      "unknown": "Unexpected error.",
+      "api_load_failed": "Could not load agency list. Please enter details manually.",
+      "no_routes_found": "No visible routes found for this agency.",
+      "no_stops_found": "No stops found for this route."
+    },
+    "abort": {
+      "already_configured": "This stop is already configured."
+    }
+  }
+}
