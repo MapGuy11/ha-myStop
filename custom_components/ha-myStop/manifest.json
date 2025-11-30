@@ -1,5 +1,5 @@
 {
-  "domain": "ha-myStop",
+  "domain": "ha_mystop",
   "name": "myStop",
   "codeowners": ["@MapGuy11"],
   "config_flow": true,
@@ -7,5 +7,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "",
   "requirements": ["aiohttp>=3.9.0","yarl>=1.9.2"],
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

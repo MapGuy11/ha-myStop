@@ -1,6 +1,6 @@
 """Constants for the Avail MyStop integration."""
 
-DOMAIN = "avail_mystop"
+DOMAIN = "ha_mystop"
 
 # Configuration Keys
 CONF_STOP_ID = "stop_id"
