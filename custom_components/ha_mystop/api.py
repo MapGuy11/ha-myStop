@@ -65,17 +65,22 @@ class AvailClient:
 					response.raise_for_status()
 					return await response.text()
 			except (aiohttp.ClientError, asyncio.TimeoutError) as err:
-				if attempt == tries:
-					try:
-						if self._fallback_file.exists():
-							_LOGGER.warning("Using local fallback file %s for URL %s due to error: %s", self._fallback_file, url, err)
-							return self._fallback_file.read_text(encoding="utf-8")
+					if attempt == tries:
+						try:
+							if self._fallback_file.exists():
+								_LOGGER.warning(
+									"Using local fallback file %s for URL %s due to error: %s",
+									self._fallback_file,
+									url,
+									err,
+								)
+								return self._fallback_file.read_text(encoding="utf-8")
 						except Exception:
-						_LOGGER.debug("Failed to read fallback file %s", self._fallback_file)
-				raise
-				_LOGGER.debug("GET %s failed (%s), retrying in %.1fs", url, err, delay)
-				await asyncio.sleep(delay)
-				delay *= 2
+							_LOGGER.debug("Failed to read fallback file %s", self._fallback_file)
+						raise
+					_LOGGER.debug("GET %s failed (%s), retrying in %.1fs", url, err, delay)
+					await asyncio.sleep(delay)
+					delay *= 2
 
 	async def _get_json(self, url: str) -> Any:
 		text = await self._get_text(url)
