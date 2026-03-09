@@ -1,0 +1,26 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<ArrayOfTransitAuthority xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Availtec.MyAvail.Gateway.Models">
+<TransitAuthority>
+<Id>1</Id>
+<Latitude>40.7620928</Latitude>
+<LogoUrl>https://realtime.catabus.com/InfoPoint/content/images/logo_app.png</LogoUrl>
+<Longitude>-77.8753755</Longitude>
+<MobileUrl>https://realtime.catabus.com/InfoPoint/?mobile=True&app=True</MobileUrl>
+<Name>CATABUS</Name>
+<RestUrl>https://realtime.catabus.com/InfoPoint/rest</RestUrl>
+<SmsPrefix>CB</SmsPrefix>
+<SmsUrl>https://realtime.catabus.com/InfoPoint/sms</SmsUrl>
+</TransitAuthority>
+<TransitAuthority>
+<Id>2</Id>
+<Latitude>40.608227</Latitude>
+<LogoUrl>https://realtimelanta.availtec.com/InfoPoint/Content/images/logo_app.png</LogoUrl>
+<Longitude>-75.490091</Longitude>
+<MobileUrl>https://realtimelanta.availtec.com/InfoPoint/?mobile=True&app=True</MobileUrl>
+<Name>Lanta</Name>
+<RestUrl>https://realtimelanta.availtec.com/InfoPoint/rest</RestUrl>
+<SmsPrefix>LN</SmsPrefix>
+<SmsUrl>https://realtimelanta.availtec.com/InfoPoint/sms</SmsUrl>
+</TransitAuthority>
+... (truncated for brevity) ...
+</ArrayOfTransitAuthority>
