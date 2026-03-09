@@ -113,6 +113,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await self.async_set_unique_id(unique_id)
                 self._abort_if_unique_id_configured()
 
+                # Title uses Name now!
                 return self.async_create_entry(
                     title=f"{self.selected_agency} - {clean_name}",
                     data={
@@ -155,8 +156,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             session = async_get_clientsession(self.hass)
             client = AvailClient(session, user_input[CONF_BASE_URL])
             try:
+                # 1. Connection Test
                 await client.get_departures(user_input[CONF_STOP_ID])
                 
+                # 2. Fetch Name
                 stop_name = await client.get_stop_info(user_input[CONF_STOP_ID])
                 
                 unique_id = f"{user_input[CONF_BASE_URL]}_{user_input[CONF_STOP_ID]}"
@@ -166,6 +169,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 data = user_input.copy()
                 data[CONF_STOP_NAME] = stop_name
                 
+                # Title uses Name now!
                 return self.async_create_entry(
                     title=f"{user_input.get(CONF_AGENCY_NAME)} - {stop_name}", 
                     data=data

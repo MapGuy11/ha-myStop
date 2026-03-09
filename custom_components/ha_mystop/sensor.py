@@ -103,8 +103,7 @@ class AvailAlertsCoordinator(DataUpdateCoordinator):
         try:
             return await self.client.get_alerts()
         except Exception as err:
-            _LOGGER.error("Error fetching alerts: %s", err)
-            return self.data if self.data is not None else []
+            raise UpdateFailed(f"Error fetching alerts: {err}")
 
 class AvailRouteAlertsCoordinator(DataUpdateCoordinator):
     """Coordinator for Specific Route Alerts (Slow Updates)."""
@@ -122,8 +121,7 @@ class AvailRouteAlertsCoordinator(DataUpdateCoordinator):
         try:
             return await self.client.get_route_details(self.route_id)
         except Exception as err:
-            _LOGGER.error("Error fetching route alerts: %s", err)
-            return self.data if self.data is not None else []
+            raise UpdateFailed(f"Error fetching route alerts: {err}")
 
 # --- SENSORS ---
 
