@@ -14,4 +14,4 @@ CONF_AGENCY_NAME = "agency_name"
 DEFAULT_NAME = "myStop"
 
 # The central API to discover all available transit agencies
-DISCOVERY_URL = "http://mobilegateway.rideralerts.com/gateway/TransitAuthorities"
+DISCOVERY_URL = "https://mobilegateway.rideralerts.com/gateway/TransitAuthorities"

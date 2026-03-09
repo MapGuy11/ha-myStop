@@ -12,6 +12,7 @@ from typing import Any, Dict, List, Tuple
 import aiohttp
 import asyncio
 from yarl import URL
+from pathlib import Path
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -53,6 +54,7 @@ class AvailClient:
 		self._session = session
 		self.base_url = _clean_base_url(base_url)
 		self._timeout = timeout or aiohttp.ClientTimeout(total=30, connect=10, sock_read=20, sock_connect=10)
+		self._fallback_file = Path(__file__).parent / "mobileGatewayFallback.xml"
 
 	async def _get_text(self, url: str) -> str:
 		tries = 3
@@ -64,10 +66,22 @@ class AvailClient:
 					return await response.text()
 			except (aiohttp.ClientError, asyncio.TimeoutError) as err:
 				if attempt == tries:
+					try:
+						if self._fallback_file.exists():
+							_LOGGER.warning(
+								"Using local fallback file %s for URL %s due to error: %s",
+								self._fallback_file,
+								url,
+								err,
+							)
+							return self._fallback_file.read_text(encoding="utf-8")
+					except Exception:
+						_LOGGER.debug("Failed to read fallback file %s", self._fallback_file)
 					raise
 				_LOGGER.debug("GET %s failed (%s), retrying in %.1fs", url, err, delay)
 				await asyncio.sleep(delay)
 				delay *= 2
+
 
 	async def _get_json(self, url: str) -> Any:
 		text = await self._get_text(url)
@@ -121,8 +135,8 @@ class AvailClient:
 			except json.JSONDecodeError:
 				pass
 
-			xml_text = re.sub(r' xmlns="[^\"]+"', "", text, count=1)
-			xml_text = re.sub(r' xmlns:i="[^\"]+"', '', xml_text, count=1)
+			xml_text = re.sub(r' xmlns="[^"]+"', "", text, count=1)
+			xml_text = re.sub(r' xmlns:i="[^"]+"', '', xml_text, count=1)
 			try:
 				root = ET.fromstring(xml_text)
 				return self._parse_departures_xml(root)
